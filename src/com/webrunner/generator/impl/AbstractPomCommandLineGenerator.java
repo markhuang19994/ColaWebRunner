@@ -42,9 +42,14 @@ public abstract class AbstractPomCommandLineGenerator implements CommandLineGene
         javaParams.setJdk(manager.getProjectSdk());
         javaParams.getVMParametersList().addParametersString("-Dmaven.multiModuleProjectDirectory=" + templateProvider.getPluginBasePath(project));
 
-        File jetBrainLibDir = ProjectInfoUtil.getJetBrainLibDir();
+        File jetBrainPluginClassFile = ProjectInfoUtil.getJetBrainPluginClassFile();
+        if (jetBrainPluginClassFile == null) {
+            throw new ExecutionException(String.format("can't found jetBrain plugin class file:%s", jetBrainPluginClassFile));
+        }
+
+        File jetBrainLibDir = FileUtil.getParentDir(jetBrainPluginClassFile, "lib");
         if (jetBrainLibDir == null) {
-            throw new ExecutionException(String.format("can't found jetBrain lib dir at: %s", jetBrainLibDir.getAbsolutePath()));
+            throw new ExecutionException(String.format("can't found jetBrain lib dir at:%s", jetBrainPluginClassFile.getAbsolutePath()));
         }
 
         File jetBrainBaseDir = jetBrainLibDir.getParentFile();

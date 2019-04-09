@@ -58,6 +58,6 @@ public abstract class AbstractMavenPluginEnvGenerator implements PluginGenerator
     }
 
     public String getPluginBasePath(Project project) {
-        return ProjectInfoUtil.getPluginDir().getAbsolutePath()+ File.separator + "temp" + File.separator + EncryptUtil.encryptMd5(project.getBaseDir().getPresentableUrl() + File.separator + container.name() + version);
+        return ProjectInfoUtil.getWebRunnerPluginDir().getAbsolutePath()+ File.separator + "temp" + File.separator + EncryptUtil.encryptMd5(project.getBaseDir().getPresentableUrl() + File.separator + container.name() + version);
     }
 }

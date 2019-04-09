@@ -21,28 +21,20 @@ import java.util.stream.Collectors;
  * @since 2018/9/25
  */
 public class ProjectInfoUtil {
-    public static File getJetBrainLibDir() {
+    public static File getJetBrainPluginClassFile() {
         try {
-//            String jetBrainBaseDir = "";
             String osName = System.getProperty("os.name");
             boolean isWindows = osName.contains("Windows");
-//            if (isWindows) {
-//                jetBrainBaseDir = "JetBrains";
-//            } else if (osName.contains("Linux")) {
-//                jetBrainBaseDir = "IDEA-U";
-//            } else {
-//                jetBrainBaseDir = "IntelliJ IDEA.app";
-//            }
             String pluginClassPath = URLDecoder.decode(ApplicationInfoImpl.class.getResource("").getPath(), "UTF-8");
-            return FileUtil.getParentDirWithCache(new File(pluginClassPath
-                    .replaceAll(isWindows ? "^(file:/)" : "^(file:)", "")), "lib");
+            return new File(pluginClassPath
+                    .replaceAll(isWindows ? "^(file:/)" : "^(file:)", ""));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static File getPluginDir() {
+    public static File getWebRunnerPluginDir() {
         return FileUtil.getParentDirWithCache(new File(FileUtil.getJarPathForClass(SQLServerDataSource.class)), "MyWebRunner");
     }
 
