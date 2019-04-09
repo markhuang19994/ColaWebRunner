@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>Mark.Is.Handsome</groupId>
+    <artifactId>AbsolutelyTrue</artifactId>
+    <version>1.0.0</version>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>maven-jetty-plugin</artifactId>
+                    <version>${version}</version>
+                    <configuration>
+                        <!--web項目的根目錄 -->
+                        <webAppSourceDirectory>${webAppSourceDirectory}</webAppSourceDirectory>
+                        <webApp>
+                            <!--webxml所在位置 -->
+                            <descriptor>${webXmlDirectory}</descriptor>
+                        </webApp>
+                        <contextPath>${contextPath}</contextPath>
+                        <!--對映在Project structure裡面設置好Artifacts輸出的classes -->
+                        <classesDirectory>${classesDirectory}</classesDirectory>
+                        <connectors>
+                            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                                <port>${port}</port>
+                                <maxIdleTime>600000</maxIdleTime>
+                            </connector>
+                        </connectors>
+                        <!--定時掃描項目 -->
+                        <scanIntervalSeconds>1</scanIntervalSeconds>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

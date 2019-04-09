@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>Mark.Is.Handsome</groupId>
+    <artifactId>AbsolutelyTrue</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${version}</version>
+                    <configuration>
+                        <!--web項目的根目錄 -->
+                        <webAppSourceDirectory>${webAppSourceDirectory}</webAppSourceDirectory>
+                        <webApp>
+                          <contextPath>${contextPath}</contextPath>
+                          <!--webxml所在位置 -->
+                          <descriptor>${webXmlDirectory}</descriptor>
+                          <webInfIncludeJarPattern>.*/spring-security[^/]*\.jar$|.*/spring-web[^/]*\.jar$|.*/classes/.*|.*/sitemesh[^/]*\.jar$</webInfIncludeJarPattern>
+                        </webApp>
+                        <!--對映在Project structure裡面設置好Artifacts輸出的classes -->
+                        <classesDirectory>${classesDirectory}</classesDirectory>
+                        <httpConnector>
+                                  <port>${port}</port>
+                        </httpConnector>
+                        <!--定時掃描項目 -->
+                        <scanIntervalSeconds>1</scanIntervalSeconds>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

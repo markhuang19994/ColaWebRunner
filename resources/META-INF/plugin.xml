@@ -1,0 +1,48 @@
+<idea-plugin>
+    <id>WebRunner</id>
+    <name>Cola Project Web Runner</name>
+    <version>1.0.1</version>
+    <vendor email="markhuang1993@gmail.com">IntelliJ Web Runner</vendor>
+
+    <description><![CDATA[
+        <p>Every 60 seconds in Africa, a minute passes!</p><br/>
+        <p>あたりまえポエム 君の前で息を止めると呼吸ができなくなってしまうよ!</p><br/>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <div style="color:#bd0000;">
+            <h3>version 1.0.1</h3>
+            <hr/>
+            <p>[Fix] Mac not found maven3 plugin path</p><br/>
+            <p>[Fix] Runner change but artifact out put dir doesn't synchronized</p><br/>
+            <p>[Change] Plugin icon size and opacity</p>
+        </div>
+    ]]></change-notes>
+
+    <idea-version since-build="131"/>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Initialises the UI when the user selects the plugin from the menu -->
+        <configurationType implementation="com.webrunner.conf.WebRunnerConfigurationType"/>
+        <programRunner id="Run" implementation="com.webrunner.runner.WebProgramRunner" order="first"/>
+        <!-- Debug - same as run but stops on breakpoints, you get the idea -->
+        <programRunner id="Debug" implementation="com.webrunner.runner.WebRunnerProgramDebugger" order="last"/>
+        <postStartupActivity implementation="com.webrunner.startup.MyPostStartupActivity"/>
+    </extensions>
+
+
+    <actions>
+        <action id="Webrunner.CleanBuild" class="com.webrunner.action.CleanBuildAction" text="clean web runner target"
+                description="Clean all project build target">
+            <add-to-group group-id="BuildMenu" anchor="last"/>
+        </action>
+        <action id="Webrunner.toolbar.CleanBuild" class="com.webrunner.action.ToolBarCleanBuildAction"
+                description="clean project target" text="clean project target">
+            <add-to-group group-id="ToolbarRunGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt F9"/>
+        </action>
+    </actions>
+
+</idea-plugin>
