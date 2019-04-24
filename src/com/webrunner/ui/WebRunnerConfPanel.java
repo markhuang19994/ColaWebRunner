@@ -125,12 +125,8 @@ public class WebRunnerConfPanel {
         return hotSwapPort;
     }
 
-    public void setHotSwapPort(JTextField hotSwapPort) {
-        this.hotSwapPort = hotSwapPort;
-    }
-
     public enum SupportWebContainer {
-        JETTY("6.1.26", "9.4.12.v20180830"), TOMCAT("2.1");
+        JETTY("6.1.26", "9.2.16.v20160414"), TOMCAT("2.1");
 
         private List<String> versions;
 

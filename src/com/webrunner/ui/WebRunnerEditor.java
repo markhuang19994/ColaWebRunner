@@ -37,6 +37,7 @@ import java.io.File;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class WebRunnerEditor extends SettingsEditor<WebRunnerConfiguration> {
 
@@ -297,23 +298,21 @@ public class WebRunnerEditor extends SettingsEditor<WebRunnerConfiguration> {
             root.addFirstChild(metaInf);
         }
 
-        for (Module m : ModuleManager.getInstance(project).getModules()) {
-            if (!isModuleNeedPackageToJar(m)) {
-                classes.addFirstChild(factory.createModuleOutput(m));
-                continue;
-            }
-
-            CompositePackagingElement cpe = factory.createArchive(m.getName() + ".jar");
-            cpe.addFirstChild(factory.createModuleOutput(m));
-            lib.addFirstChild(cpe);
+        List<Module> modules = Arrays.asList(ModuleManager.getInstance(project).getModules());
+        for (Module m : modules) {
+            classes.addFirstChild(factory.createModuleOutput(m));
         }
 
+        List<String> modelNames = modules.stream().map(Module::getName).collect(Collectors.toList());
         Library[] libraries = LibraryTablesRegistrar.getInstance().getLibraryTable(project).getLibraries();
         if (libraries.length > 0) {
-            Arrays.stream(libraries).forEach(library -> factory
-                    .createLibraryElements(library)
-                    .forEach(lib::addFirstChild)
-            );
+            Arrays.stream(libraries)
+                    .filter(library -> !modelNames.contains(library.getName()))
+                    .forEach(
+                            library -> factory
+                                    .createLibraryElements(library)
+                                    .forEach(lib::addFirstChild)
+                    );
         }
 
         wInf.addFirstChild(classes);
