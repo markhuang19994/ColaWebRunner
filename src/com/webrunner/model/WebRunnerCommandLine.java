@@ -47,7 +47,7 @@ public class WebRunnerCommandLine extends JavaCommandLineState {
 
     @Override
     public JavaParameters createJavaParameters() throws ExecutionException {
-        updateArtifactModules(runConf.getProject());//會出錯誤
+//        updateArtifactModules(runConf.getProject());//會出錯誤
         JavaParameters javaParams = new JavaParameters();
         // Use the same JDK as the project
         Project project = this.environment.getProject();
@@ -203,7 +203,8 @@ public class WebRunnerCommandLine extends JavaCommandLineState {
                 if (child instanceof CompositePackagingElement) {
                     CompositePackagingElement cChild = (CompositePackagingElement) child;
                     if (cChild.getName().contains(".jar")) {
-                        inLibModules.removeIf(module -> module.getName().equals(cChild.getName().replace(".jar", "")));
+                        inLibModules.removeIf(module ->
+                                module.getName().equals(cChild.getName().replace(".jar", "")));
                     }
                 }
             }
