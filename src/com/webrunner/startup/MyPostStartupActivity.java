@@ -42,13 +42,13 @@ public class MyPostStartupActivity implements StartupActivity {
 
     public void runActivity(@NotNull Project project) {
         try{
-            ProjectRootManager projectRoot = ProjectRootManager.getInstance(project);
-            if (projectRoot.getProjectSdk() == null) {
-                Sdk sdk = Arrays.stream(ProjectJdkTable.getInstance().getAllJdks())
-                        .min((o1, o2) -> String.valueOf(o1.getVersionString()).contains("1.8") ? 0 : 1)
-                        .orElse(null);
-                projectRoot.setProjectSdk(sdk);
-            }
+//            ProjectRootManager projectRoot = ProjectRootManager.getInstance(project);
+//            if (projectRoot.getProjectSdk() == null) {
+//                Sdk sdk = Arrays.stream(ProjectJdkTable.getInstance().getAllJdks())
+//                        .min((o1, o2) -> String.valueOf(o1.getVersionString()).contains("1.8") ? 0 : 1)
+//                        .orElse(null);
+//                projectRoot.setProjectSdk(sdk);
+//            }
             updateArtifactLibOnModuleAddNewLib(project);
         }catch (Exception e){
             e.printStackTrace();
