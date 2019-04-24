@@ -97,7 +97,7 @@ public class WebRunnerEditor extends SettingsEditor<WebRunnerConfiguration> {
         if (hotSwapPort != null && !"".equals(hotSwapPort)) {
             this.configurationPanel.getHotSwapPort().setText(hotSwapPort);
         } else {
-            this.configurationPanel.getHotSwapPort().setText("4000");
+            this.configurationPanel.getHotSwapPort().setText("random");
         }
         // Jetty XML (Optional)
         this.configurationPanel.getXmlField().setText(webRunnerConfiguration.getJettyXml());

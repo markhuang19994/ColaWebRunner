@@ -56,7 +56,7 @@ public class WebRunnerConfiguration extends LocatableConfigurationBase implement
     private boolean useDefaultArtifact = true;
     private int webContainerIndex = 0;
     private int webContainerVersionIndex = 0;
-    private String hotSwapPort = "4000";
+    private String hotSwapPort = "random";
 
     private Project project;
     private String action;
